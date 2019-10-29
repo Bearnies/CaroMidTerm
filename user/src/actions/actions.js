@@ -9,11 +9,11 @@ export const NEW_HISTORY = 'NEW_HISTORY'
 export const NEW_STEPNUMBER = 'NEW_STEPNUMBER'
 
 //User's Actions
-export const UPDATE_DATA = 'UPDATE_DATA'
-export const UPDATE_TOKEN = 'UPDATE_TOKEN'
+export const GET_USER = 'GET_USER'
+export const GET_TOKEN = 'GET_TOKEN'
 export const REDIRECT_API = 'REDIRECT_API'
 export const RESET_URL = 'RESET_URL'
-export const UPDATE_ALL_USER = 'UPDATE_ALL_USER'
+export const GET_ALL_USER = 'GET_ALL_USER'
 
 
 export function nextPlayer() {
@@ -77,14 +77,14 @@ export function newstepNumber(newstepNumber) {
 
 export function getUser(data) {
   return {
-    type: 'UPDATE_DATA',
+    type: 'GET_USER',
     data
   }
 }
 
 export function getToken(token) {
   return {
-    type: 'UPDATE_TOKEN',
+    type: 'GET_TOKEN',
     token
   }
 }
@@ -96,15 +96,15 @@ export function redirectAPI(newURL) {
   }
 }
 
-export function stopAction() {
+export function resetURL() {
   return {
     type: 'RESET_URL',
   }
 }
 
-export function getAllUserData(user) {
+export function getAllUser(user) {
   return {
-    type: 'UPDATE_ALL_USER',
+    type: 'GET_ALL_USER',
     user
   }
 }

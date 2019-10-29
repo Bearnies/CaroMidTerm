@@ -11,11 +11,11 @@ import {
     NEW_HISTORY,
     NEW_STEPNUMBER,
 
-    UPDATE_DATA,
-    UPDATE_TOKEN,
-    UPDATE_ALL_USER,
+    GET_USER,
+    GET_TOKEN,
+    GET_ALL_USER,
     RESET_URL,
-    REDIRECT_API
+    REDIRECT_API,
 } from '../actions/actions'
 
 const xIsNext = (state = true, action) => {
@@ -101,19 +101,19 @@ const initialStateUser = {
   password: ''
 }
 
-const userAction = (state = {data: null, token: null}, action) => {
+const user = (state = {data: null, token: null}, action) => {
   switch (action.type) {
-    case UPDATE_DATA:
+    case GET_USER:
       return {
         data: action.data,
         token: state.token
       };
-    case UPDATE_TOKEN:
+    case GET_TOKEN:
       return {
         ...state,
         token: action.token
       };
-    case UPDATE_ALL_USER:
+    case GET_ALL_USER:
       return action.user;
     default:
       return state;
@@ -146,8 +146,7 @@ export default combineReducers({
     history,
     stepNumber,
 
-    initialStateUser,
-    userAction,
+    user,
     apiAction,
     ...createForms({
       userForm: initialStateUser

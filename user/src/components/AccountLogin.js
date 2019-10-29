@@ -2,7 +2,6 @@ import React from 'react';
 import {Button, Form} from 'react-bootstrap';
 import {Link, Redirect} from 'react-router-dom';
 import {Form as ReduxForm, Control} from 'react-redux-form';
-
 import "./AccountLogin.css"
 
 const bootstrapForm = props => {
@@ -14,7 +13,7 @@ const AccountLogin = ({handleSubmit, isRedirect, url}) => {
     if (isRedirect) {
       return <Redirect to={url}/>;
     }
-    return <div />;
+    return <div/>;
   };
 
   return(

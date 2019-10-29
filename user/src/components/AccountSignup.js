@@ -8,12 +8,12 @@ const bootstrapForm = props => {
   return <Form.Control {...props} />;
 };
 
-const AccountSignup = ({ isRedirect, url, handleSubmit }) => {
+const AccountSignup = ({handleSubmit, isRedirect, url}) => {
   const link = isRedirect => {
     if (isRedirect) {
       return <Redirect to={url}/>;
     }
-    return <div />;
+    return <div/>;
   };
 
 

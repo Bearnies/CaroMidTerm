@@ -1,19 +1,19 @@
 import {connect} from 'react-redux';
-import {getAllUserData, redirectAPI, stopAction} from '../actions';
+import {getAllUser, redirectAPI, resetURL} from '../actions/actions';
 import AccountSignup from '../components/AccountSignup';
 
 const mapStateToProps = state => {
-  const {API} = state;
+  const {apiAction} = state;
   return {
-    isRedirect: API.isRedirect,
-    url: API.url
+    isRedirect: apiAction.isRedirect,
+    url: apiAction.url
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => {
     console.log(data);
-    fetch('/register', {
+    fetch('/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
       .then(res => res.json())
       .then(res => {
         console.log(res);
-        dispatch(getAllUserData({ data: res.user, token: res.token }));
+        dispatch(getAllUser({data: res.user, token: res.token}));
         dispatch(redirectAPI('/home'));
       })
       .catch(error => {
@@ -35,7 +35,7 @@ const mapDispatchToProps = dispatch => ({
       });
   },
   stopRedirect: () => {
-    dispatch(stopAction());
+    dispatch(resetURL());
   }
 });
 
