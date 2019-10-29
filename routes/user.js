@@ -4,7 +4,7 @@ var usermodel = require('../models/model');
 var passport = require('../middlewares/passport');
 const jwt = require('jsonwebtoken');
 
-router.post('/register', (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   console.log(req.body);
   const newUser = {
     username: req.body.username,
@@ -23,7 +23,7 @@ router.post('/login', (req, res, next) => {
     console.log(err);
     if (err || !user) {
       return res.status(400).json({
-        message: 'Login failed, something is not right',
+        message: 'Login failed, some credential(s) is not right',
         user
       });
     }
