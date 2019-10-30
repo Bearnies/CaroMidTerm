@@ -31,7 +31,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'your_jwt_secret'
+      secretOrKey: 'JWT_Token'
     },
     async function(jwtPayload, done) {
       //Tìm người dùng trong db
