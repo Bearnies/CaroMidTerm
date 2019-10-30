@@ -23,7 +23,7 @@ router.post('/login', (req, res, next) => {
     console.log(err);
     if (err || !user) {
       return res.status(400).json({
-        message: 'Login failed, some credential(s) is not right',
+        message: info ? info.message: 'Login failed, some credential(s) is not right',
         user
       });
     }

@@ -1,12 +1,14 @@
 var mysql = require('mysql');
 
-var createConnection =  mysql.connection = mysql.createConnection({
+var createConnection = () => {
+  return mysql.createConnection({
     host: 'localhost',
     port: '3306',
     user: 'root',
     password: '',
     database: 'userdatabase'
-});
+  });
+}
 
 module.exports = {
     load: sql => {

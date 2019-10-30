@@ -12,7 +12,7 @@ passport.use(
       usernameField: 'username',
       passwordField: 'password'
     },
-    async function(email, password, done) {
+    async function(username, password, done) {
     //Gọi DB lưu trữ nếu đối tượng người dùng được định dạng và chuẩn bị được lưu trữ trong jwt
       try {
         const user = await usermodel.findOne({username, password});
