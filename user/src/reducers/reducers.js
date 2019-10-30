@@ -120,7 +120,7 @@ const user = (state = {data: null, token: null}, action) => {
   }
 }
 
-const apiAction = (state = {}, action) => {
+const apiAction = (state = {isRedirect: false, url:''}, action) => {
   switch (action.type) {
     case REDIRECT_API:
       return {

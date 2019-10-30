@@ -89,10 +89,10 @@ export function getToken(token) {
   }
 }
 
-export function redirectAPI(newURL) {
+export function redirectAPI(url) {
   return {
     type: 'REDIRECT_API',
-    newURL
+    url
   }
 }
 

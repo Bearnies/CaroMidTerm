@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import {getAllUser, redirectAPI, resetURL} from '../actions/actions';
+import {redirectAPI} from '../actions/actions';
 import AccountSignup from '../components/AccountSignup';
 
 const mapStateToProps = state => {
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => {
     console.log(data);
-    fetch('/signup', {
+    fetch('/user/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -24,18 +24,10 @@ const mapDispatchToProps = dispatch => ({
       }),
       redirect: 'follow'
     })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res);
-        dispatch(getAllUser({data: res.user, token: res.token}));
-        dispatch(redirectAPI('/home'));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  },
-  stopRedirect: () => {
-    dispatch(resetURL());
+      .then(res => res.json(),
+            error => {console.log(error)}
+      );
+    dispatch(redirectAPI('/user/login'));
   }
 });
 

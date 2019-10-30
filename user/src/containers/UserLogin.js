@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => {
     console.log(data);
-    fetch('/login', {
+    fetch('/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

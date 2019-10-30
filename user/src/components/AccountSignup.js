@@ -46,7 +46,7 @@ const AccountSignup = ({handleSubmit, isRedirect, url}) => {
             Sign Up
           </Button>
   
-          <Link to='/login' className='btn Cancel'>Cancel</Link>
+          <Link to='/user/login' className='btn Cancel'>Cancel</Link>
         </ReduxForm>
 
         <div>{link(isRedirect)}</div>
