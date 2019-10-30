@@ -12,10 +12,10 @@ import {
 function App() {
   return <Router>
       <Switch>
-        <Route exact path ='/user/login' component={AccountLogin}></Route>
-        <Route path ='/user/login' component={AccountLogin}></Route>
+        <Route exact path ='/' component={AccountLogin}></Route>
+        <Route path ='/login' component={AccountLogin}></Route>
         <Route path ='/home' component={Game}></Route>
-        <Route path ='/user/signup' component={AccountSignup}></Route>
+        <Route path ='/signup' component={AccountSignup}></Route>
       </Switch>   
   </Router>
 }

@@ -12,7 +12,7 @@ export const NEW_STEPNUMBER = 'NEW_STEPNUMBER'
 export const GET_USER = 'GET_USER'
 export const GET_TOKEN = 'GET_TOKEN'
 export const REDIRECT_API = 'REDIRECT_API'
-export const RESET_URL = 'RESET_URL'
+//export const RESET_URL = 'RESET_URL'
 export const GET_ALL_USER = 'GET_ALL_USER'
 
 
@@ -89,18 +89,18 @@ export function getToken(token) {
   }
 }
 
-export function redirectAPI(url) {
+export function redirectAPI(URL) {
   return {
     type: 'REDIRECT_API',
-    url
+    URL
   }
 }
 
-export function resetURL() {
-  return {
-    type: 'RESET_URL',
-  }
-}
+// export function resetURL() {
+//   return {
+//     type: 'RESET_URL',
+//   }
+// }
 
 export function getAllUser(user) {
   return {

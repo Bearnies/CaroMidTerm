@@ -1,19 +1,19 @@
 import {connect} from 'react-redux';
-import {getAllUser, redirectAPI, resetURL} from '../actions/actions';
+import {getAllUser, redirectAPI} from '../actions/actions';
 import AccountLogin from '../components/AccountLogin';
 
 const mapStateToProps = state => {
   const {apiAction} = state;
   return {
     isRedirect: apiAction.isRedirect,
-    url: apiAction.url
+    URL: apiAction.URL
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => {
     console.log(data);
-    fetch('/user/login', {
+    fetch('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -33,9 +33,6 @@ const mapDispatchToProps = dispatch => ({
       .catch(error => {
         console.log(error);
       });
-  },
-  stopRedirect: () => {
-    dispatch(resetURL());
   }
 });
 

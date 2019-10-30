@@ -6,14 +6,14 @@ const mapStateToProps = state => {
   const {apiAction} = state;
   return {
     isRedirect: apiAction.isRedirect,
-    url: apiAction.url
+    URL: apiAction.URL
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => {
     console.log(data);
-    fetch('/user/signup', {
+    fetch('/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -27,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
       .then(res => res.json(),
             error => {console.log(error)}
       );
-    dispatch(redirectAPI('/user/login'));
+    dispatch(redirectAPI('/login'));
   }
 });
 

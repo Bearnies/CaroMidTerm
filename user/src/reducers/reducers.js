@@ -14,7 +14,6 @@ import {
     GET_USER,
     GET_TOKEN,
     GET_ALL_USER,
-    RESET_URL,
     REDIRECT_API,
 } from '../actions/actions'
 
@@ -120,17 +119,12 @@ const user = (state = {data: null, token: null}, action) => {
   }
 }
 
-const apiAction = (state = {isRedirect: false, url:''}, action) => {
+const apiAction = (state = {isRedirect: false, URL:''}, action) => {
   switch (action.type) {
     case REDIRECT_API:
       return {
         isRedirect: true,
-        url: action.url
-      };
-    case RESET_URL:
-      return {
-        isRedirect: false,
-        url: ''
+        URL: action.URL
       };
     default:
       return state;
