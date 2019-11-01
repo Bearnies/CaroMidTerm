@@ -40,4 +40,27 @@ router.post('/login', (req, res, next) => {
   })(req, res);
 });
 
+router.get('/profile', function(req, res, next){
+  passport.authenticate('local', { session: false }, function(err, user, info) {
+    console.log(err);
+    if (err || !user) {
+      return res.status(401).json({
+        message: info ? info.message: 'Something is wrong, user does not exist',
+        user
+      });
+    }
+
+    res.send(req.user, { session: false }, err => {
+      if (err) {
+        res.send(err);
+      }
+
+      console.log(user);
+      const token = jwt.sign(JSON.stringify(user[0]), 'JWT_Token');
+      return res.json({user: user[0], token});
+    });
+
+  })(req, res);
+});
+
 module.exports = router;
