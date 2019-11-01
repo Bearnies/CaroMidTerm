@@ -17,9 +17,9 @@ function Game(username) {
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
-              <Navbar.Text>
+              <Navbar.Brand  href='/user'>
                 {`Signed in as: ${username.username}`}
-              </Navbar.Text>
+              </Navbar.Brand>
             </Navbar.Collapse>
           </Navbar>
       </div>

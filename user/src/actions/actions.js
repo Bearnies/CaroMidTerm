@@ -96,12 +96,6 @@ export function redirectAPI(URL) {
   }
 }
 
-// export function resetURL() {
-//   return {
-//     type: 'RESET_URL',
-//   }
-// }
-
 export function getAllUser(user) {
   return {
     type: 'GET_ALL_USER',
@@ -376,6 +370,21 @@ function calculateWinnerRCross(row, col, squares) {
     return false;
 }
 
+export function computerMovesAuto(row, col, squares){
+  row = Math.floor(Math.random() * 20) + 1;
+  col = Math.floor(Math.random() * 20) + 1;
+  console.log(row);
+  console.log(col);
+  if (squares[row][col] !== 'X' && squares[row][col] !== 'O')
+  {
+    squares[row][col] = 'O';
+  }
+  else {
+    row = Math.floor(Math.random() * 20) + 1;
+    col = Math.floor(Math.random() * 20) + 1;
+  }
+}
+
 export function handleClick(row, col) {
     return (dispatch, getState) => {
         //Set Initial State
@@ -392,11 +401,11 @@ export function handleClick(row, col) {
             const current = currhistory[i];
             if (i % 2 === 1)
             {
-                caroboard[current.row][current.col] = 'X';
+              caroboard[current.row][current.col] = 'X';
             }
             else
             {
-                caroboard[current.row][current.col] = 'O';
+              caroboard[current.row][current.col] = 'O';
             }
         }
 
@@ -415,7 +424,27 @@ export function handleClick(row, col) {
         if (currwinner || squares[row][col]) {
             return;
         }
-        squares[row][col] = xIsNext ? 'X' : 'O';
+
+        if (xIsNext === false)
+        {
+          // row = Math.floor(Math.random() * 20) + 1;
+          // col = Math.floor(Math.random() * 20) + 1;
+          // console.log(row);
+          // console.log(col);
+          // if (squares[row][col] !== 'X' && squares[row][col] !== 'O')
+          // {
+          //   squares[row][col] = 'O';
+          // }
+          // else {
+          //   row = Math.floor(Math.random() * 20) + 1;
+          //   col = Math.floor(Math.random() * 20) + 1;
+          // }
+          squares[row][col] = 'O';
+        }
+        else
+        {
+          squares[row][col] = 'X';
+        }
 
         //Calculate Winner
         const winHorizontal = calculateWinnerHorizontal(row, col, squares);
