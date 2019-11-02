@@ -370,18 +370,98 @@ function calculateWinnerRCross(row, col, squares) {
     return false;
 }
 
-export function computerMovesAuto(row, col, squares){
-  row = Math.floor(Math.random() * 20) + 1;
-  col = Math.floor(Math.random() * 20) + 1;
-  console.log(row);
-  console.log(col);
-  if (squares[row][col] !== 'X' && squares[row][col] !== 'O')
-  {
-    squares[row][col] = 'O';
-  }
-  else {
-    row = Math.floor(Math.random() * 20) + 1;
-    col = Math.floor(Math.random() * 20) + 1;
+export function computerMovesAuto(){
+  return (dispatch, getState) => {
+    //Set Initial State
+    const initialState = getState();
+    const {history, stepNumber, xIsNext, winner, winSquares} = initialState;
+    const currhistory = history.slice(0, stepNumber + 1);
+    const caroboard = Array(20)
+    .fill(null)
+    .map(() => new Array(20).fill(null));
+
+    //Randomise moves for computer
+    let row = null;
+    let col = null;
+    do {
+      row = Math.floor(Math.random() * 20);
+      col = Math.floor(Math.random() * 20);
+    } while (currhistory.indexOf({row, col}) !== -1)
+    console.log(row);
+    console.log(col);
+
+    //Go to move
+    for (let i = 1; i < currhistory.length; i += 1)
+    {
+        const current = currhistory[i];
+        if (i % 2 === 1)
+        {
+          caroboard[current.row][current.col] = 'X';
+        }
+        else
+        {
+          caroboard[current.row][current.col] = 'O';
+        }
+    }
+
+    //Set temporary winner for go to move
+    let tempWinner = winner
+    if (stepNumber !== (history.length - 1)) {
+        tempWinner = null;
+        dispatch(newWinner(null));
+        dispatch(newwinSquares([]));
+    }
+
+    const currwinner = tempWinner;
+    const squares = caroboard;
+
+    //Next player if winner === null
+    if (currwinner || squares[row][col]) {
+        return;
+    }
+
+    if (xIsNext === false)
+    {
+      squares[row][col] = 'O';
+    }
+    else
+    {
+      squares[row][col] = 'X';
+    }
+
+    //Calculate Winner
+    const winHorizontal = calculateWinnerHorizontal(row, col, squares);
+    const winVertical = calculateWinnerVertical(row, col, squares);
+    const winLCross = calculateWinnerLCross(row, col, squares);
+    const winRCross = calculateWinnerRCross(row, col, squares);
+    
+    if (winHorizontal.result) {
+      const result = winHorizontal.winLine;
+      dispatch(newWinner(squares[row][col]));
+      dispatch(newwinSquares(winSquares.concat(result)));
+    }
+
+    else if (winVertical.result) {
+      const result = winVertical.winLine;
+      dispatch(newWinner(squares[row][col]));
+      dispatch(newwinSquares(winSquares.concat(result)));
+    }
+
+    else if (winLCross.result) {
+      const result = winLCross.winLine;
+      dispatch(newWinner(squares[row][col]));
+      dispatch(newwinSquares(winSquares.concat(result)));
+    } 
+
+    else if (winRCross.result) {
+      const result = winRCross.winLine;
+      dispatch(newWinner(squares[row][col]));
+      dispatch(newwinSquares(winSquares.concat(result)));
+    }
+
+    dispatch(newHistory(currhistory.concat([{row, col}])));
+    dispatch(nextPlayer());
+    dispatch(newstepNumber(currhistory.length));
   }
 }
 
@@ -427,18 +507,6 @@ export function handleClick(row, col) {
 
         if (xIsNext === false)
         {
-          // row = Math.floor(Math.random() * 20) + 1;
-          // col = Math.floor(Math.random() * 20) + 1;
-          // console.log(row);
-          // console.log(col);
-          // if (squares[row][col] !== 'X' && squares[row][col] !== 'O')
-          // {
-          //   squares[row][col] = 'O';
-          // }
-          // else {
-          //   row = Math.floor(Math.random() * 20) + 1;
-          //   col = Math.floor(Math.random() * 20) + 1;
-          // }
           squares[row][col] = 'O';
         }
         else

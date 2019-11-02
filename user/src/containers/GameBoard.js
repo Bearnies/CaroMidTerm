@@ -1,6 +1,6 @@
 import Board from '../components/Board';
 import {connect} from 'react-redux';
-import {handleClick} from '../actions/actions';
+import {handleClick, computerMovesAuto} from '../actions/actions';
 
 const mapStateToProps = state => {
     const {stepNumber, history, winSquares} = state;
@@ -40,6 +40,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     onClick: (row, col) => {
     dispatch(handleClick(row, col));
+    dispatch(computerMovesAuto());
   }
 });
   
