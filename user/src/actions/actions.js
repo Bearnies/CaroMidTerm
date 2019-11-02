@@ -380,7 +380,7 @@ export function computerMovesAuto(){
     .fill(null)
     .map(() => new Array(20).fill(null));
 
-    //Randomise moves for computer
+    //Randomize moves for computer
     let row = null;
     let col = null;
     do {
@@ -397,10 +397,6 @@ export function computerMovesAuto(){
         if (i % 2 === 1)
         {
           caroboard[current.row][current.col] = 'X';
-        }
-        else
-        {
-          caroboard[current.row][current.col] = 'O';
         }
     }
 
