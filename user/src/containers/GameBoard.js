@@ -33,7 +33,9 @@ const mapStateToProps = state => {
 
     return {
       winSquares: result,
-      squares: caroboard
+      squares: caroboard,
+      username: state.user.data.username,
+      password: state.user.data.password
     }
 };
 

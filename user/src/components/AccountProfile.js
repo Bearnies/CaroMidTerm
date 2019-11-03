@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Form} from 'react-bootstrap';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {Form as ReduxForm, Control} from 'react-redux-form';
 import './AccountSignup.css';
 
@@ -8,7 +8,7 @@ const bootstrapForm = props => {
   return <Form.Control {...props} />;
 };
 
-const AccountProfile = ({handleSubmit, isRedirect, URL}) => {
+const AccountProfile = ({handleSubmit, isRedirect, URL}, username, password) => {
   const link = isRedirect => {
     if (isRedirect) {
       return <Redirect to={URL}/>;
@@ -25,9 +25,10 @@ const AccountProfile = ({handleSubmit, isRedirect, URL}) => {
               autoFocus
               name='username'
               model='.username'
-              component={bootstrapForm}
               value={username.username}
-            />
+              component={bootstrapForm}
+            >
+            </Control.text>
           </Form.Group>
   
           <Form.Group>
@@ -35,16 +36,15 @@ const AccountProfile = ({handleSubmit, isRedirect, URL}) => {
             <Control.text
               name='password'
               model='.password'
+              value={username.password}
               component={bootstrapForm}
-              placeholder='Enter your Password'
-              value={password.password}
             />
           </Form.Group>
 
           <Form.Group>
             <Form.Label>New Password</Form.Label>
             <Control.text
-              name='password'
+              name='newpassword'
               model='.password'
               component={bootstrapForm}
               placeholder='Enter your New Password'
