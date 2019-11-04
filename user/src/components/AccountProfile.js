@@ -8,7 +8,7 @@ const bootstrapForm = props => {
   return <Form.Control {...props} />;
 };
 
-const AccountProfile = ({handleSubmit, isRedirect, URL}, username, password) => {
+const AccountProfile = ({handleSubmit, isRedirect, URL}, user) => {
   const link = isRedirect => {
     if (isRedirect) {
       return <Redirect to={URL}/>;
@@ -25,7 +25,6 @@ const AccountProfile = ({handleSubmit, isRedirect, URL}, username, password) => 
               autoFocus
               name='username'
               model='.username'
-              value={username.username}
               component={bootstrapForm}
             >
             </Control.text>
@@ -36,7 +35,8 @@ const AccountProfile = ({handleSubmit, isRedirect, URL}, username, password) => 
             <Control.text
               name='password'
               model='.password'
-              value={username.password}
+              type='password'
+              value={user.password}
               component={bootstrapForm}
             />
           </Form.Group>
@@ -45,7 +45,8 @@ const AccountProfile = ({handleSubmit, isRedirect, URL}, username, password) => 
             <Form.Label>New Password</Form.Label>
             <Control.text
               name='newpassword'
-              model='.password'
+              model='.newpassword'
+              type='password'
               component={bootstrapForm}
               placeholder='Enter your New Password'
             />

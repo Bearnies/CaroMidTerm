@@ -2,6 +2,10 @@
     padding: 200px;
 }
 
+.Signupbtn {
+    width: 500px;
+}
+
 .SignupForm form {
     margin: 0 auto;
     max-width: 300px;
@@ -10,8 +14,7 @@
 .Cancel {
     background-color: #FF0000;
     border-color: #FF0000;
-    width: 300px;
-    margin-top: 5px;
+    width: 500px;
     color: #fff; 
 }
 

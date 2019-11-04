@@ -6,9 +6,8 @@ import GameStatus from '../containers/GameStatus'
 import GameMovesHistory from '../containers/GameMovesHistory'
 import 'bootstrap/dist/css/bootstrap.css';
 import {Navbar} from 'react-bootstrap'
-import AccountProfile from '../containers/UserProfile'
 
-function Game(username) {
+function Game(user) {
   return (
     <div>
       <div>
@@ -18,8 +17,8 @@ function Game(username) {
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
-              <Navbar.Brand  href='/profile' component={AccountProfile}>
-                {`Signed in as: ${username.username}`}
+              <Navbar.Brand  href='/profile'>
+                {`Signed in as: ${user.username}`}
               </Navbar.Brand>
             </Navbar.Collapse>
           </Navbar>
