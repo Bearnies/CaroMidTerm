@@ -31,13 +31,15 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'JWT_Token'
+      secretOrKey: 'JWT_Token',
+      passReqToCallback: true
     },
     async function(jwtPayload, done) {
       //Tìm người dùng trong db
       try {
         const user = await usermodel.findOneById(jwtPayload.id);
         if (user) {
+          req.user = user;
           return done(null, user);
         }
         return done(null, false);

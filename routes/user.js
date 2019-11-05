@@ -35,32 +35,32 @@ router.post('/login', (req, res, next) => {
 
       console.log(user);
       const token = jwt.sign(JSON.stringify(user[0]), 'JWT_Token');
+      // return res.json({user: {
+      //   idUser: user[0].idUser,
+      //   username: '',
+      //   description: ''
+      //  },token
+      // });
       return res.json({user: user[0], token});
     });
   })(req, res);
 });
 
-router.get('/profile', function(req, res, next){
-  passport.authenticate('local', { session: false }, function(err, user, info) {
-    console.log(err);
-    if (err || !user) {
-      return res.status(401).json({
-        message: info ? info.message: 'Something is wrong, user does not exist',
-        user
-      });
-    }
 
-    res.send(req.user, { session: false }, err => {
-      if (err) {
-        res.send(err);
-      }
+router.post('/updateprofile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+    usermodel
+      .update(req.body.data)
+      .then(event => {
+        res.status(200);
+      })
+      .catch(next);
+  }
+);
 
-      console.log(user);
-      const token = jwt.sign(JSON.stringify(user[0]), 'JWT_Token');
-      return res.json({user: user[0], token});
-    });
+router.post('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  res.json({data: req.user[0]});
+  }
+);
 
-  })(req, res);
-});
 
 module.exports = router;
