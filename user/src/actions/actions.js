@@ -1,3 +1,4 @@
+import {actions} from 'react-redux-form'
 export const NEXT_PLAYER = 'NEXT_PLAYER'
 export const NEW_NEXTPLAYER = 'NEW_NEXTPLAYER'
 export const GET_WINSQUARES = 'GET_WINSQUARES'
@@ -12,7 +13,6 @@ export const NEW_STEPNUMBER = 'NEW_STEPNUMBER'
 export const GET_USER = 'GET_USER'
 export const GET_TOKEN = 'GET_TOKEN'
 export const REDIRECT_API = 'REDIRECT_API'
-//export const RESET_URL = 'RESET_URL'
 export const GET_ALL_USER = 'GET_ALL_USER'
 
 
@@ -102,6 +102,57 @@ export function getAllUser(user) {
     user
   }
 }
+
+export const getUserProfile = (user) => {
+  return dispatch => {
+    dispatch(actions.merge('userForm', user)); //Thực thi actions.change() để merge value vào value được định nghĩa bởi usermodel (userForm)
+  };
+};
+
+export const postProtected = (URL, redirectToURL, data) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const {user} = state;
+    fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`
+      },
+      body: JSON.stringify({
+        data
+      }),
+      redirect: 'follow'
+    })
+      .then()
+      .catch(error => {
+        console.log(error);
+      });
+    dispatch(redirectAPI(redirectToURL));
+  };
+};
+
+export const getProtected = (URL, nextAction) => {
+  return (dispatch, getState) => {
+    const state = getState();
+    const {user} = state;
+    fetch(URL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`
+      },
+      redirect: 'follow'
+    })
+      .then(res => res.json())
+      .then(res => {
+        dispatch(nextAction(res.data));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+};
 
 function calculateWinnerHorizontal(row, col, squares) {
     let latestClick = squares[row][col];

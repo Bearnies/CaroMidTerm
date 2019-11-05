@@ -1,5 +1,7 @@
 import React from 'react';
-import {Button, Form} from 'react-bootstrap';
+import {useRef, useEffect} from 'react';
+import ReactDOM from 'react-dom';
+import {Button, Form, Navbar, Modal} from 'react-bootstrap';
 import {Redirect, Link} from 'react-router-dom';
 import {Form as ReduxForm, Control} from 'react-redux-form';
 import './AccountSignup.css';
@@ -8,7 +10,7 @@ const bootstrapForm = props => {
   return <Form.Control {...props} />;
 };
 
-const AccountProfile = ({handleSubmit, isRedirect, URL}, user) => {
+const AccountProfile = ({handleSubmit, isRedirect, URL, onLoad}) => {
   const link = isRedirect => {
     if (isRedirect) {
       return <Redirect to={URL}/>;
@@ -16,51 +18,88 @@ const AccountProfile = ({handleSubmit, isRedirect, URL}, user) => {
     return <div/>;
   };
 
-    return (
+  let userChanges = useRef();
+  let saveChanges = useRef();
+  let descriptionChanges = useRef();
+  const updateProfile = () => {
+    ReactDOM.findDOMNode(userChanges).setAttribute('disabled', 'disabled'); //findDOMNode dùng để đọc value của người dùng nhập vào. Set Value
+    ReactDOM.findDOMNode(saveChanges).removeAttribute('disabled');
+    ReactDOM.findDOMNode(descriptionChanges).removeAttribute('disabled');
+  };
+
+  useEffect(() => {
+    onLoad();
+  });
+
+  return (
+    <div>
+      <div>
+        <Navbar bg="dark" variant="dark">
+            <Navbar.Brand>
+              Caro Việt Nam
+            </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar>
+      </div>
+
       <div className='SignupForm'>
         <ReduxForm model='userForm' onSubmit={event => handleSubmit(event)}>
-          <Form.Group>
-            <Form.Label>Username</Form.Label>
-            <Control.text
-              autoFocus
-              name='username'
-              model='.username'
-              component={bootstrapForm}
-            >
-            </Control.text>
-          </Form.Group>
-  
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <Control.text
-              name='password'
-              model='.password'
-              type='password'
-              value={user.password}
-              component={bootstrapForm}
-            />
-          </Form.Group>
+          <Modal.Dialog>
+            <Modal.Header>
+              <Modal.Title>PROFILE</Modal.Title>
+            </Modal.Header>
 
-          <Form.Group>
-            <Form.Label>New Password</Form.Label>
-            <Control.text
-              name='newpassword'
-              model='.newpassword'
-              type='password'
-              component={bootstrapForm}
-              placeholder='Enter your New Password'
-            />
-          </Form.Group>
-  
-          <Button type='submit' block>
-            Submit Changes
-          </Button>
-          
-          <Link to='/login' className='btn Cancel'>Cancel</Link>
+            <Modal.Body>
+              <Form.Group>
+                <Form.Label>Username</Form.Label>
+                <Control.text
+                  autoFocus
+                  name='username'
+                  model='.username'
+                  component={bootstrapForm}
+                  disabled
+                />
+              </Form.Group>
+      
+              <Form.Group>
+                <Form.Label>Password</Form.Label>
+                <Control.text
+                  name='password'
+                  model='.password'
+                  component={bootstrapForm}
+                  type='password'
+                  disabled
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Description</Form.Label>
+                <Control.text
+                  name='description'
+                  model='.description'
+                  component={bootstrapForm}
+                  ref={element => (descriptionChanges = element)}
+                  disabled
+                />
+              </Form.Group>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button className='btn' block ref={element => (userChanges = element)} onClick={() => updateProfile()} >
+                Change
+              </Button>
+
+              <Button className='btn' block disabled ref={element => (saveChanges = element)}>
+                Save
+              </Button>
+
+              <Link to='/login' className='btn Cancel'>Cancel</Link>
+              </Modal.Footer>
+          </Modal.Dialog>
         </ReduxForm>
-
         <div>{link(isRedirect)}</div>
       </div>
+    </div>
   );
 }
 
