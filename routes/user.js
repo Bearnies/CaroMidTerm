@@ -35,12 +35,6 @@ router.post('/login', (req, res, next) => {
 
       console.log(user);
       const token = jwt.sign(JSON.stringify(user[0]), 'JWT_Token');
-      // return res.json({user: {
-      //   idUser: user[0].idUser,
-      //   username: '',
-      //   description: ''
-      //  },token
-      // });
       return res.json({user: user[0], token});
     });
   })(req, res);
@@ -57,7 +51,7 @@ router.post('/updateprofile', passport.authenticate('jwt', { session: false }), 
   }
 );
 
-router.post('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+router.get('/profile', passport.authenticate('jwt', { session: false }), (req, res, next) => {
   res.json({data: req.user[0]});
   }
 );
