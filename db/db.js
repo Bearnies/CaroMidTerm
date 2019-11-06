@@ -6,7 +6,7 @@ var createConnection = () => {
     port: '3306',
     user: 'bearnies',
     password: 'khanghi1',
-    database: 'userdatabase'
+    database: 'btcn06web'
   });
 }
 
