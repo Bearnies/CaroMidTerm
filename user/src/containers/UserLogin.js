@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
       .then(res => {
         console.log(res);
         dispatch(getAllUser({data: res.user, token: res.token}));
-        dispatch(redirectAPI('/home'));
+        dispatch(redirectAPI('/game'));
       })
       .catch(error => {
         console.log(error);

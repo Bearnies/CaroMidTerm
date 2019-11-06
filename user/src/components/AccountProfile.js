@@ -2,9 +2,8 @@ import React from 'react';
 import {useRef, useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import {Button, Form, Navbar, Modal} from 'react-bootstrap';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {Form as ReduxForm, Control} from 'react-redux-form';
-import './AccountSignup.css';
 
 const bootstrapForm = props => {
   return <Form.Control {...props} />;
@@ -85,16 +84,14 @@ const AccountProfile = ({handleSubmit, isRedirect, URL, onLoad}) => {
             </Modal.Body>
 
             <Modal.Footer>
-              <Button className='btn' block ref={element => (userChanges = element)} onClick={() => updateProfile()} >
+              <Button variant='primary' block ref={element => (userChanges = element)} onClick={() => updateProfile()} >
                 Change
               </Button>
-
-              <Button className='btn' block disabled ref={element => (saveChanges = element)}>
+              
+              <Button variant='primary' block disabled ref={element => (saveChanges = element)}>
                 Save
               </Button>
-
-              <Link to='/login' className='btn Cancel'>Cancel</Link>
-              </Modal.Footer>
+            </Modal.Footer>
           </Modal.Dialog>
         </ReduxForm>
         <div>{link(isRedirect)}</div>

@@ -97,6 +97,11 @@ ol, ul {
   transition: 2s;
 }
 
+.homepageBtn
+{
+  margin-left: 40px;
+}
+
 .square.highlight {
   background: #32CD32;
 }

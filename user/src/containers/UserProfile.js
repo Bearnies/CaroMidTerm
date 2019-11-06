@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: data => {
-    dispatch(postProtected('/updateprofile', '/home', data))
+    dispatch(postProtected('/updateprofile', '/login', data))
   },
   onLoad: () => {
     dispatch(getProtected('/profile', getUserProfile));
